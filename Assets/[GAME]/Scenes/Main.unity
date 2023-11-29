@@ -1807,6 +1807,8 @@ GameObject:
   - component: {fileID: 1858559482}
   - component: {fileID: 1858559481}
   - component: {fileID: 1858559485}
+  - component: {fileID: 1858559487}
+  - component: {fileID: 1858559486}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -1882,6 +1884,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialBoardCount: 7
+--- !u!114 &1858559486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1858559480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 084fdfd02b454f23a58899e9c36d6fce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialMoneyCount: 100
+--- !u!114 &1858559487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1858559480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c341a1bfa954657b07e4ab0f2416f3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialLifeCount: 5
 --- !u!1 &1923832686
 GameObject:
   m_ObjectHideFlags: 0
