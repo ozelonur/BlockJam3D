@@ -58,20 +58,22 @@ namespace OrangeBear.Bears
 
         private void GenerateBoards()
         {
-            int index = 0;
+            const float spacing = 2.25f;
+            float startX = -(_boardCount - 1) * spacing / 2;
+
             for (int i = 0; i < _boardCount; i++)
             {
                 BoardBear board = _poolManager.GetBoard();
-                board.transform.SetParent(boardsParent);
-                board.transform.localPosition =
-                    i % 2 == 0 ? new Vector3(-index * 2.25f, 0, 0) : new Vector3(index * 2.25f, 0, 0);
+                Transform boardTransform;
+                (boardTransform = board.transform).SetParent(boardsParent);
+                
+                float xPos = startX + i * spacing;
+                boardTransform.localPosition = new Vector3(xPos, 0, 0);
 
-                if (i % 2 == 0)
-                {
-                    index++;
-                }
+                board.InitBoard();
             }
         }
+
 
         #endregion
     }
