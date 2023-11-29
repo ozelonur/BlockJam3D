@@ -121,21 +121,20 @@ namespace OrangeBear.Bears
                     _boards[i + 2].currentCube == null)
                     continue;
 
-                if (_boards[i].currentCube.currentColor == _boards[i + 1].currentCube.currentColor &&
-                    _boards[i + 1].currentCube.currentColor == _boards[i + 2].currentCube.currentColor)
-                {
-                    _boards[i].currentCube.Explode();
-                    _boards[i + 1].currentCube.Explode();
-                    _boards[i + 2].currentCube.Explode();
-                    
-                    _boards[i].currentCube = null;
-                    _boards[i + 1].currentCube = null;
-                    _boards[i + 2].currentCube = null;
+                if (_boards[i].currentCube.currentColor != _boards[i + 1].currentCube.currentColor ||
+                    _boards[i + 1].currentCube.currentColor != _boards[i + 2].currentCube.currentColor) continue;
 
-                    shouldReorder = true;
-                    firstIndex = i;
-                    break; // Remove this if you want to check for multiple sets of matching cubes
-                }
+                _boards[i].currentCube.Explode();
+                _boards[i + 1].currentCube.Explode();
+                _boards[i + 2].currentCube.Explode();
+
+                _boards[i].currentCube = null;
+                _boards[i + 1].currentCube = null;
+                _boards[i + 2].currentCube = null;
+
+                shouldReorder = true;
+                firstIndex = i;
+                break;
             }
 
             if (shouldReorder)
@@ -147,33 +146,36 @@ namespace OrangeBear.Bears
         private IEnumerator ReorderCubes(int firstIndex)
         {
             yield return new WaitForSeconds(.3f);
-            
+
             for (int i = 0; i < _boards.Count; i++)
             {
-                if (_boards[i].currentCube == null)
+                BoardBear board = _boards[i];
+
+                if (board.currentCube == null)
                 {
                     continue;
                 }
-                
+
                 int emptyBoardIndex = GetEmptyBoardIndex();
-                
+
                 if (emptyBoardIndex == -1)
                 {
                     yield break;
                 }
 
-                if (emptyBoardIndex < firstIndex)
+                if (i < firstIndex)
                 {
                     continue;
                 }
-
+                
                 yield return new WaitForSeconds(.05f);
-                _boards[emptyBoardIndex].currentCube = _boards[i].currentCube;
-                _boards[i].currentCube = null;
+                _boards[emptyBoardIndex].currentCube = board.currentCube;
+                board.currentCube = null;
                 _boards[emptyBoardIndex].currentCube.Reorder(_boards[emptyBoardIndex].transform.position);
             }
+
         }
-        
+
         private int GetEmptyBoardIndex()
         {
             for (int i = 0; i < _boards.Count; i++)
@@ -185,24 +187,6 @@ namespace OrangeBear.Bears
             }
 
             return -1;
-        }
-
-
-        #endregion
-
-        #region Public Methods
-
-        public BoardBear GetEmptyBoard()
-        {
-            foreach (BoardBear board in _boards)
-            {
-                if (board.currentCube == null)
-                {
-                    return board;
-                }
-            }
-
-            return null;
         }
 
         #endregion
