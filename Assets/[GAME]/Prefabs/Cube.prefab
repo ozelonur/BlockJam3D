@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1454284758086360830}
   - component: {fileID: 8721806777853143389}
+  - component: {fileID: 8595848429732653264}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -50,6 +51,19 @@ MonoBehaviour:
   greenColor: {r: 0.4292047, g: 0.85882354, b: 0.34509802, a: 1}
   blueColor: {r: 0.34509802, g: 0.5789395, b: 0.85882354, a: 1}
   yellowColor: {r: 0.85882354, g: 0.60289115, b: 0.34509802, a: 1}
+--- !u!65 &8595848429732653264
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2209430504854132497}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.75, y: 1.75, z: 1.75}
+  m_Center: {x: 0, y: 0.875, z: 0}
 --- !u!1 &3412205502393707096
 GameObject:
   m_ObjectHideFlags: 0
