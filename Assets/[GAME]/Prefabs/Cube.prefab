@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1454284758086360830}
+  - component: {fileID: 8721806777853143389}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -32,6 +33,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8721806777853143389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2209430504854132497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4c46733cd1648a9aa9a41d8c63cfc0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meshRenderer: {fileID: 552242290950162469}
+  redColor: {r: 0.85882354, g: 0.34509805, b: 0.34509805, a: 1}
+  greenColor: {r: 0.4292047, g: 0.85882354, b: 0.34509802, a: 1}
+  blueColor: {r: 0.34509802, g: 0.5789395, b: 0.85882354, a: 1}
+  yellowColor: {r: 0.85882354, g: 0.60289115, b: 0.34509802, a: 1}
 --- !u!1 &3412205502393707096
 GameObject:
   m_ObjectHideFlags: 0
@@ -146,6 +164,11 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: e83a82d505b605a4d9ec264b24cbe845,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: be913de6aeeba3b44824a5065624b1a3, type: 2}
     - target: {fileID: 919132149155446097, guid: e83a82d505b605a4d9ec264b24cbe845,
         type: 3}
       propertyPath: m_Name
@@ -153,6 +176,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e83a82d505b605a4d9ec264b24cbe845, type: 3}
+--- !u!23 &552242290950162469 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: e83a82d505b605a4d9ec264b24cbe845,
+    type: 3}
+  m_PrefabInstance: {fileID: 1182301356651369633}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1721177343086015306 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e83a82d505b605a4d9ec264b24cbe845,

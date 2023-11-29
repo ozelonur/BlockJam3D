@@ -9,14 +9,18 @@ namespace _GAME_.Scripts.Managers
     {
         #region Serialized Fields
 
-        [Header("Prefabs")] [SerializeField] private Transform boardsParent;
-        [Header("Parents")] [SerializeField] private BoardBear boardPrefab;
+        [Header("Parents")] [SerializeField] private Transform boardsParent;
+        [SerializeField] private Transform cubeParent;
+        
+        [Header("Prefab")] [SerializeField] private BoardBear boardPrefab;
+        [SerializeField] private CubeBear cubePrefab;
 
         #endregion
 
         #region Public Variables
 
         public CustomObjectPool<BoardBear> boardPool;
+        public CustomObjectPool<CubeBear> cubePool;
 
         #endregion
 
@@ -25,6 +29,7 @@ namespace _GAME_.Scripts.Managers
         private void Awake()
         {
             boardPool = new CustomObjectPool<BoardBear>(boardPrefab, 10, boardsParent);
+            cubePool = new CustomObjectPool<CubeBear>(cubePrefab, 10, cubeParent);
         }
 
         #endregion
@@ -35,10 +40,20 @@ namespace _GAME_.Scripts.Managers
         {
             return boardPool.Get();
         }
+        
+        public CubeBear GetCube()
+        {
+            return cubePool.Get();
+        }
 
         public void ReturnBoard(BoardBear board)
         {
             boardPool.Release(board);
+        }
+        
+        public void ReturnCube(CubeBear cube)
+        {
+            cubePool.Release(cube);
         }
 
         #endregion
