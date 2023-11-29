@@ -11,6 +11,7 @@ namespace OrangeBear.Bears
         [SerializeField] private Transform cubeParent;
 
         #endregion
+
         #region Public Variables
 
         public bool isFilled;
@@ -38,12 +39,12 @@ namespace OrangeBear.Bears
             {
                 return;
             }
-            
+
             CubeBear cube = PoolManager.Instance.GetCube();
             Transform cubeTransform = cube.transform;
             cubeTransform.SetParent(cubeParent);
             cubeTransform.localPosition = Vector3.zero;
-            
+
             cube.InitCube();
         }
 
