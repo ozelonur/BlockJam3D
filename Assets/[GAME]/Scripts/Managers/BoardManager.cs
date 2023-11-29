@@ -1,6 +1,8 @@
 using _GAME_.Scripts.Entities;
 using _GAME_.Scripts.Extensions;
+using _GAME_.Scripts.GlobalVariables;
 using OrangeBear.Core;
+using OrangeBear.EventSystem;
 using UnityEngine;
 
 namespace _GAME_.Scripts.Managers
@@ -41,8 +43,39 @@ namespace _GAME_.Scripts.Managers
 
             if (boardData.BoardCount == 0)
             {
-                boardData.IncreaseBoardCount(initialBoardCount);
+                IncreaseBoardCount(initialBoardCount);
             }
+        }
+
+        #endregion
+
+        #region Event Methods
+
+        protected override void CheckRoarings(bool status)
+        {
+            if (status)
+            {
+                Register(GameEvents.InitLevel, InitLevel);
+            }
+
+            else
+            {
+                Unregister(GameEvents.InitLevel, InitLevel);
+            }
+        }
+
+        private void InitLevel(object[] arguments)
+        {
+            Roar(CustomEvents.SetBoardCount, GetBoardCount());
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private int GetBoardCount()
+        {
+            return boardData.BoardCount;
         }
 
         #endregion
@@ -52,11 +85,6 @@ namespace _GAME_.Scripts.Managers
         public void IncreaseBoardCount(int count)
         {
             boardData.IncreaseBoardCount(count);
-        }
-
-        public int GetBoardCount()
-        {
-            return boardData.BoardCount;
         }
 
         #endregion
