@@ -1,7 +1,9 @@
 {
   "dependencies": {
     "com.orangebear.core": "https://github.com/ozelonur/com.orangebear.core.git",
+    "com.orangebear.entitysystem": "https://github.com/ozelonur/com.orangebear.entitysystem.git",
     "com.orangebear.ui": "https://github.com/ozelonur/com.orangebear.ui.git",
+    "com.orangebear.utilities": "https://github.com/ozelonur/com.orangebear.utilities.git",
     "com.unity.collab-proxy": "2.0.0",
     "com.unity.ide.rider": "3.0.18",
     "com.unity.ide.visualstudio": "2.0.17",
