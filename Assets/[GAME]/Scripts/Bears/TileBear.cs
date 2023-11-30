@@ -1,6 +1,7 @@
 using _GAME_.Scripts.GlobalVariables;
 using _GAME_.Scripts.Managers;
 using _GAME_.Scripts.Models;
+using DG.Tweening;
 using OrangeBear.EventSystem;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -18,7 +19,7 @@ namespace OrangeBear.Bears
         public bool containsPipe;
 
         #endregion
-        
+
         #region Serialized Fields
 
         [SerializeField] private Transform cubeParent;
@@ -34,12 +35,12 @@ namespace OrangeBear.Bears
         private void Awake()
         {
             if (!containsPipe) return;
-            
+
             pipeBear = PoolManager.Instance.GetPipe();
 
             Transform pipeBearTransform;
             (pipeBearTransform = pipeBear.transform).SetParent(cubeParent);
-                
+
             pipeBearTransform.localPosition = Vector3.zero;
 
             pipeBear.linkedTile = linkedTile;
@@ -69,6 +70,28 @@ namespace OrangeBear.Bears
             cube.InitCube(color);
 
             currentCube = cube;
+            cube.currentTile = this;
+        }
+
+        public void GenerateCubeOnTileFromPipe(ColorData color)
+        {
+            CubeBear cube = PoolManager.Instance.GetCube();
+            Transform cubeTransform = cube.transform;
+
+            cubeTransform.localScale = Vector3.zero;
+
+            cubeTransform.SetParent(cubeParent);
+            cubeTransform.localPosition = Vector3.zero;
+
+            cubeTransform.DOScale(Vector3.one, .3f).SetEase(Ease.OutBack).SetLink(gameObject).OnComplete(() =>
+            {
+                cubeTransform.DOKill();
+            }).SetDelay(.1f);
+
+            cube.InitCube(color, true);
+
+            currentCube = cube;
+            cube.currentTile = this;
         }
 
         #endregion

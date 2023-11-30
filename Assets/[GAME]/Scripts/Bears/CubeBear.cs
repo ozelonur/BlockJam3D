@@ -29,12 +29,13 @@ namespace OrangeBear.Bears
         #region Public Variables
 
         public CubeColor currentColor;
+        public TileBear currentTile;
 
         #endregion
 
         #region Public Methods
 
-        public void InitCube(ColorData color)
+        public void InitCube(ColorData color, bool isFromPipe = false)
         {
             _onTheWay = false;
             currentColor = color.color;
@@ -42,9 +43,11 @@ namespace OrangeBear.Bears
             Material material = meshRenderer.material;
             
             material.color = color.colorValue;
-            
-            
-            _cubeTransform.localScale = Vector3.one;
+
+            if (!isFromPipe)
+            {
+                _cubeTransform.localScale = Vector3.one;
+            }
 
             Transform root = transform.root;
             _exitWay = root.GetComponent<GameLevelBear>().exitWay;
@@ -68,20 +71,6 @@ namespace OrangeBear.Bears
 
             _onTheWay = true;
             
-            // Vector3 position = _cubeTransform.position;
-            // Vector3 target = new (position.x, position.y, _exitWay.position.z);
-            //
-            // BoardBear board = _boardController.GetEmptyBoard();
-            // board.currentCube = this;
-            //
-            // transform.DOMove(target, 0.5f).OnComplete(() =>
-            // {
-            //     transform.DOMove(board.transform.position, 0.5f).OnComplete(() =>
-            //     {
-            //         Roar(CustomEvents.CheckBoard);
-            //     });
-            // });
-            
             Roar(CustomEvents.MoveCubeToTheBoard, this);
         }
 
@@ -102,6 +91,12 @@ namespace OrangeBear.Bears
         {
             Vector3 position = _cubeTransform.position;
             Vector3 targetPosition = new Vector3(position.x, position.y, _exitWay.position.z);
+            
+            currentTile.currentCube = null;
+            
+            Roar(CustomEvents.TileIsEmptyNowAlert, currentTile);
+            
+            currentTile = null;
             
             transform.DOMove(targetPosition, 0.5f).OnComplete(() =>
             {

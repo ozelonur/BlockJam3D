@@ -13,5 +13,7 @@ namespace _GAME_.Scripts.GlobalVariables
         public const string CheckBoard = nameof(CheckBoard);
         
         public const string MoveCubeToTheBoard = nameof(MoveCubeToTheBoard);
+        
+        public const string TileIsEmptyNowAlert = nameof(TileIsEmptyNowAlert);
     }
 }
