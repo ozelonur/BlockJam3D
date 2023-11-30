@@ -22,6 +22,8 @@ namespace OrangeBear.Bears
         private Dictionary<CubeColor, int> cubeColorCounts = new();
         private List<TileBear> _tiles;
 
+        private List<ColorData> _generatedColors;
+
         #endregion
 
         #region Event Methods
@@ -56,7 +58,7 @@ namespace OrangeBear.Bears
             {
                 cubeColorCounts[color.color] = 0;
             }
-            
+
             GenerateCubes();
         }
 
@@ -76,7 +78,8 @@ namespace OrangeBear.Bears
 
             for (int i = 0; i < maxTotalSets; i++)
             {
-                foreach (ColorData color in cubeColors.Where(color => cubeColorCounts[color.color] < maxSetsForAnyColor * 3))
+                foreach (ColorData color in cubeColors.Where(color =>
+                             cubeColorCounts[color.color] < maxSetsForAnyColor * 3))
                 {
                     CreateSetOfThreeCubes(color);
                 }
@@ -89,21 +92,26 @@ namespace OrangeBear.Bears
                 ColorData additionalColor = cubeColors[Random.Range(0, cubeColors.Count)];
 
                 if (cubeColorCounts[additionalColor.color] >= 3) continue;
-                
+
                 CreateSetOfThreeCubes(additionalColor);
                 remainingTiles -= 3;
             }
+            
+            GenerateCubesFromList();
         }
 
         private void CreateSetOfThreeCubes(ColorData color)
         {
+            _generatedColors ??= new List<ColorData>();
+
             int createdCubes = 0;
             while (createdCubes < 3)
             {
                 TileBear tile = GetRandomTile();
                 if (tile != null && cubeColorCounts[color.color] < (_tiles.Count / cubeColors.Count) * 3)
                 {
-                    tile.GenerateCubeOnTile(color);
+                    // tile.GenerateCubeOnTile(color);
+                    _generatedColors.Add(color);
                     cubeColorCounts[color.color]++;
                     createdCubes++;
                 }
@@ -114,15 +122,24 @@ namespace OrangeBear.Bears
             }
         }
 
-
-
+        private void GenerateCubesFromList()
+        {
+            foreach (ColorData color in _generatedColors)
+            {
+                TileBear tile = GetRandomTile();
+                if (tile != null)
+                {
+                    tile.GenerateCubeOnTile(color);
+                }
+            }
+        }
 
         private TileBear GetRandomTile()
         {
             List<TileBear> emptyTiles = _tiles.Where(tile => tile.currentCube == null).ToList();
-            
+
             OBDebug.Log("Empty tiles count: " + emptyTiles.Count);
-            
+
             return emptyTiles.Count == 0 ? null : emptyTiles[Random.Range(0, emptyTiles.Count)];
         }
 
