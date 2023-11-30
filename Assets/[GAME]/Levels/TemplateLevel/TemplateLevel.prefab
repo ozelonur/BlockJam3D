@@ -154,6 +154,7 @@ GameObject:
   - component: {fileID: 7901224135766147014}
   - component: {fileID: 7329140746290715517}
   - component: {fileID: 2330433034315988482}
+  - component: {fileID: 3158840412921749100}
   m_Layer: 0
   m_Name: TemplateLevel
   m_TagString: Untagged
@@ -204,6 +205,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc7248a9201d45e2adfaae200daaec12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3158840412921749100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7901224135766147017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c58b62e92b94023affa3e32fd57ad18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cubeColors:
+  - color: 2
+    colorValue: {r: 0.85882354, g: 0.34509805, b: 0.34509805, a: 1}
+  - color: 0
+    colorValue: {r: 0.43627745, g: 0.85882354, b: 0.34509802, a: 1}
+  - color: 1
+    colorValue: {r: 0.9339623, g: 0.8060904, b: 0.16300285, a: 1}
+  - color: 3
+    colorValue: {r: 0.16470587, g: 0.89190924, b: 0.93333334, a: 1}
 --- !u!1 &9145483676480707027
 GameObject:
   m_ObjectHideFlags: 0

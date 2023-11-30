@@ -1,6 +1,7 @@
 using _GAME_.Scripts.Enums;
 using _GAME_.Scripts.GlobalVariables;
 using _GAME_.Scripts.Managers;
+using _GAME_.Scripts.Models;
 using DG.Tweening;
 using OrangeBear.EventSystem;
 using UnityEngine;
@@ -14,19 +15,12 @@ namespace OrangeBear.Bears
         [Header("Components")] [SerializeField]
         private Renderer meshRenderer;
 
-        [SerializeField] private Color redColor;
-        [SerializeField] private Color greenColor;
-        [SerializeField] private Color blueColor;
-        [SerializeField] private Color yellowColor;
-
         #endregion
 
         #region Private Variables
 
         private Transform _exitWay;
         private Transform _cubeTransform;
-        
-        private BoardControllerBear _boardController;
 
         private bool _onTheWay;
 
@@ -40,28 +34,20 @@ namespace OrangeBear.Bears
 
         #region Public Methods
 
-        public void InitCube()
+        public void InitCube(ColorData color)
         {
             _onTheWay = false;
-            CubeColor color = (CubeColor)Random.Range(0, 4);
-            
-            currentColor = color;
+            currentColor = color.color;
 
             Material material = meshRenderer.material;
-            material.color = color switch
-            {
-                CubeColor.Red => redColor,
-                CubeColor.Green => greenColor,
-                CubeColor.Blue => blueColor,
-                CubeColor.Yellow => yellowColor,
-                _ => material.color
-            };
+            
+            material.color = color.colorValue;
+            
             
             _cubeTransform.localScale = Vector3.one;
 
             Transform root = transform.root;
             _exitWay = root.GetComponent<GameLevelBear>().exitWay;
-            _boardController = root.GetComponent<BoardControllerBear>();
         }
 
         #endregion
