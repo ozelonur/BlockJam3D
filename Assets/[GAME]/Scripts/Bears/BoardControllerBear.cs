@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using _GAME_.Scripts.GlobalVariables;
 using OrangeBear.EventSystem;
 using UnityEngine;
@@ -67,6 +68,11 @@ namespace OrangeBear.Bears
 
                 _boards[placementIndex].currentCube = newItem;
                 newItem.Move(_boards[placementIndex].transform.position);
+            }
+
+            else
+            {
+                Roar(GameEvents.OnGameComplete, false);
             }
         }
 
@@ -140,6 +146,14 @@ namespace OrangeBear.Bears
             if (shouldReorder)
             {
                 StartCoroutine(ReorderCubes(firstIndex));
+            }
+
+            else
+            {
+                if (_boards.All(board => board.currentCube != null))
+                {
+                    Roar(GameEvents.OnGameComplete,false);
+                }
             }
         }
 

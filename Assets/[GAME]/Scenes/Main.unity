@@ -1436,6 +1436,7 @@ MonoBehaviour:
   startButton: {fileID: 1923832688}
   retryButton: {fileID: 1153929484}
   nextButton: {fileID: 230588145}
+  levelText: {fileID: 1706307720}
 --- !u!4 &1483419124
 Transform:
   m_ObjectHideFlags: 0
