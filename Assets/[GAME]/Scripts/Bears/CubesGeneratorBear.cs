@@ -155,6 +155,8 @@ namespace OrangeBear.Bears
                     }
                 }
             }
+            
+            Roar(CustomEvents.CheckSides);
         }
 
         #endregion

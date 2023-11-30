@@ -41,7 +41,7 @@ namespace OrangeBear.Bears
             currentColor = color.color;
 
             Material material = meshRenderer.material;
-            
+
             material.color = color.colorValue;
 
             if (!isFromPipe)
@@ -51,6 +51,20 @@ namespace OrangeBear.Bears
 
             Transform root = transform.root;
             _exitWay = root.GetComponent<GameLevelBear>().exitWay;
+        }
+
+        public void Down()
+        {
+            Vector3 localPosition = _cubeTransform.localPosition;
+            localPosition = new Vector3(localPosition.x, localPosition.y - 1,
+                localPosition.y);
+            _cubeTransform.localPosition = localPosition;
+        }
+
+        public void Up()
+        {
+            _cubeTransform.DOLocalMoveY(_cubeTransform.localPosition.y + 1, 0.5f).SetEase(Ease.OutBack)
+                .SetLink(gameObject);
         }
 
         #endregion
@@ -70,7 +84,7 @@ namespace OrangeBear.Bears
             }
 
             _onTheWay = true;
-            
+
             Roar(CustomEvents.MoveCubeToTheBoard, this);
         }
 
@@ -91,27 +105,24 @@ namespace OrangeBear.Bears
         {
             Vector3 position = _cubeTransform.position;
             Vector3 targetPosition = new Vector3(position.x, position.y, _exitWay.position.z);
-            
+
             currentTile.currentCube = null;
-            
+
             Roar(CustomEvents.TileIsEmptyNowAlert, currentTile);
-            
+
             currentTile = null;
-            
+
             transform.DOMove(targetPosition, 0.5f).OnComplete(() =>
             {
-                transform.DOMove(target, 0.5f).OnComplete(() =>
-                {
-                    Roar(CustomEvents.CheckBoard);
-                });
+                transform.DOMove(target, 0.5f).OnComplete(() => { Roar(CustomEvents.CheckBoard); });
             });
         }
-        
+
         public void Shift(Vector3 target)
         {
             transform.DOMove(target, 0.5f);
         }
-        
+
         public void Reorder(Vector3 target)
         {
             transform.DOMove(target, 0.5f);

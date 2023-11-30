@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 1454284758086360830}
   - component: {fileID: 8721806777853143389}
   - component: {fileID: 8595848429732653264}
-  m_Layer: 0
+  - component: {fileID: 826267527080261929}
+  m_Layer: 6
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47,10 +48,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meshRenderer: {fileID: 552242290950162469}
-  redColor: {r: 0.85882354, g: 0.34509805, b: 0.34509805, a: 1}
-  greenColor: {r: 0.4292047, g: 0.85882354, b: 0.34509802, a: 1}
-  blueColor: {r: 0.34509802, g: 0.5789395, b: 0.85882354, a: 1}
-  yellowColor: {r: 0.85882354, g: 0.60289115, b: 0.34509802, a: 1}
+  currentColor: 0
+  currentTile: {fileID: 0}
 --- !u!65 &8595848429732653264
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -64,6 +63,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.75, y: 1.75, z: 1.75}
   m_Center: {x: 0, y: 0.875, z: 0}
+--- !u!114 &826267527080261929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2209430504854132497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7974859fbf940aeb5c5d353ebd496f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rayLength: 2
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 448
 --- !u!1 &3412205502393707096
 GameObject:
   m_ObjectHideFlags: 0

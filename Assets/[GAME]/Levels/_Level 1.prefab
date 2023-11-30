@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1573627742126616779}
   - component: {fileID: 5385569499835165192}
   - component: {fileID: 3935276007990311133}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1, y: 3, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &855090406838854127
 GameObject:
@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 7323900989223787111}
   - component: {fileID: 5895736602771613568}
   - component: {fileID: 8172517215649624755}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -192,7 +192,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1, y: 3, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3135853465370813492
 GameObject:
@@ -291,7 +291,7 @@ GameObject:
   - component: {fileID: 515920383619416245}
   - component: {fileID: 7253329191688461844}
   - component: {fileID: 1527160375989562174}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -374,7 +374,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1, y: 3, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8005968886518753554
 GameObject:
@@ -388,7 +388,7 @@ GameObject:
   - component: {fileID: 6192998128965668457}
   - component: {fileID: 2997508456561266431}
   - component: {fileID: 1597708607006637097}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -471,7 +471,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1, y: 3, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &9019403224347636920
 GameObject:
@@ -485,7 +485,7 @@ GameObject:
   - component: {fileID: 2170329208275160229}
   - component: {fileID: 145178441433313117}
   - component: {fileID: 2066807790680420840}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -568,7 +568,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1, y: 3, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1302774442308936350
 PrefabInstance:

@@ -11,6 +11,7 @@ namespace _GAME_.Scripts.GlobalVariables
         public const string AddTileToCubeGenerator = nameof(AddTileToCubeGenerator);
         
         public const string CheckBoard = nameof(CheckBoard);
+        public const string CheckSides = nameof(CheckSides);
         
         public const string MoveCubeToTheBoard = nameof(MoveCubeToTheBoard);
         
