@@ -2,22 +2,28 @@ using _GAME_.Scripts.GlobalVariables;
 using _GAME_.Scripts.Managers;
 using _GAME_.Scripts.Models;
 using OrangeBear.EventSystem;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace OrangeBear.Bears
 {
     public class TileBear : Bear
     {
-        #region Serialized Fields
-
-        [SerializeField] private Transform cubeParent;
-
-        #endregion
-
         #region Public Variables
 
         public bool isFilled;
         public CubeBear currentCube;
+        public TileBear linkedTile;
+        public bool containsPipe;
+
+        #endregion
+        
+        #region Serialized Fields
+
+        [SerializeField] private Transform cubeParent;
+
+        [ShowIf("containsPipe")] [SerializeField]
+        private int cubeCountInPipe;
 
         #endregion
 
@@ -46,7 +52,7 @@ namespace OrangeBear.Bears
             cubeTransform.localPosition = Vector3.zero;
 
             cube.InitCube(color);
-            
+
             currentCube = cube;
         }
 

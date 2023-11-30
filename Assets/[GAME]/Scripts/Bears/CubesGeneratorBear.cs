@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using _GAME_.Scripts.Enums;
+using _GAME_.Scripts.Extensions;
 using _GAME_.Scripts.GlobalVariables;
 using _GAME_.Scripts.Models;
 using OrangeBear.EventSystem;
@@ -65,29 +66,62 @@ namespace OrangeBear.Bears
 
         private void GenerateCubes()
         {
-            foreach (ColorData color in cubeColors)
-            {
-                while (cubeColorCounts[color.color] < 3)
-                {
-                    TileBear tile = GetRandomTile();
+            int maxSetsForAnyColor = _tiles.Count / cubeColors.Count;
+            int maxTotalSets = maxSetsForAnyColor * cubeColors.Count;
 
-                    if (tile != null)
-                    {
-                        tile.GenerateCubeOnTile(color);
-                        cubeColorCounts[color.color]++;
-                    }
-                    
-                    else
-                    {
-                        break;
-                    }
+            foreach (ColorData colorData in cubeColors)
+            {
+                cubeColorCounts[colorData.color] = 0;
+            }
+
+            for (int i = 0; i < maxTotalSets; i++)
+            {
+                foreach (ColorData color in cubeColors.Where(color => cubeColorCounts[color.color] < maxSetsForAnyColor * 3))
+                {
+                    CreateSetOfThreeCubes(color);
+                }
+            }
+
+            int remainingTiles = _tiles.Count - (maxTotalSets * 3);
+
+            while (remainingTiles > 0)
+            {
+                ColorData additionalColor = cubeColors[Random.Range(0, cubeColors.Count)];
+
+                if (cubeColorCounts[additionalColor.color] >= 3) continue;
+                
+                CreateSetOfThreeCubes(additionalColor);
+                remainingTiles -= 3;
+            }
+        }
+
+        private void CreateSetOfThreeCubes(ColorData color)
+        {
+            int createdCubes = 0;
+            while (createdCubes < 3)
+            {
+                TileBear tile = GetRandomTile();
+                if (tile != null && cubeColorCounts[color.color] < (_tiles.Count / cubeColors.Count) * 3)
+                {
+                    tile.GenerateCubeOnTile(color);
+                    cubeColorCounts[color.color]++;
+                    createdCubes++;
+                }
+                else
+                {
+                    break;
                 }
             }
         }
 
+
+
+
         private TileBear GetRandomTile()
         {
             List<TileBear> emptyTiles = _tiles.Where(tile => tile.currentCube == null).ToList();
+            
+            OBDebug.Log("Empty tiles count: " + emptyTiles.Count);
             
             return emptyTiles.Count == 0 ? null : emptyTiles[Random.Range(0, emptyTiles.Count)];
         }
