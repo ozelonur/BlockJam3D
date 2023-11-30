@@ -107,6 +107,7 @@ namespace OrangeBear.Bears
                 {
                     cubeColorCounts[randomColor.color] = 1;
                 }
+
                 remainingCubes--;
             }
 
@@ -155,8 +156,36 @@ namespace OrangeBear.Bears
                     }
                 }
             }
-            
+
             Roar(CustomEvents.CheckSides);
+        }
+
+        #endregion
+
+        #region Public Methods
+
+        public bool CheckAreTilesEmpty()
+        {
+            foreach (TileBear tile in _tiles)
+            {
+                if (tile.containsPipe)
+                {
+                    if (tile.pipeBear.colorData.Count > 0)
+                    {
+                        return false;
+                    }
+                }
+                
+                else
+                {
+                    if (tile.currentCube != null)
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
         }
 
         #endregion

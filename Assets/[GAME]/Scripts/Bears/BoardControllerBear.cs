@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using _GAME_.Scripts.GlobalVariables;
+using DG.Tweening;
 using OrangeBear.EventSystem;
 using UnityEngine;
 
@@ -12,6 +13,16 @@ namespace OrangeBear.Bears
         #region Private Variables
 
         private List<BoardBear> _boards;
+        private CubesGeneratorBear _cubesGenerator;
+
+        #endregion
+
+        #region MonoBehaviour Methods
+
+        private void Awake()
+        {
+            _cubesGenerator = GetComponent<CubesGeneratorBear>();
+        }
 
         #endregion
 
@@ -145,6 +156,7 @@ namespace OrangeBear.Bears
 
             if (shouldReorder)
             {
+                CheckIsGameCompleted();
                 StartCoroutine(ReorderCubes(firstIndex));
             }
 
@@ -201,6 +213,18 @@ namespace OrangeBear.Bears
             }
 
             return -1;
+        }
+
+        private void CheckIsGameCompleted()
+        {
+            bool allBoardsAreEmpty = _boards.All(board => board.currentCube == null);
+
+            bool allTilesAreEmpty = _cubesGenerator.CheckAreTilesEmpty();
+            
+            if (allBoardsAreEmpty && allTilesAreEmpty)
+            {
+                DOVirtual.DelayedCall(.5f, () => { Roar(GameEvents.OnGameComplete, true); });
+            }
         }
 
         #endregion
