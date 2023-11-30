@@ -10,11 +10,16 @@ namespace OrangeBear.Bears
 
         public List<ColorData> colorData;
 
+        public TileBear linkedTile;
+
         #endregion
 
-        #region Private Variables
+        #region Public Methods
 
-        private TileBear _linkedTile;
+        public void AddColor(ColorData color)
+        {
+            colorData.Add(color);
+        }
 
         #endregion
     }

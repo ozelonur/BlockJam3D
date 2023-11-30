@@ -11,9 +11,11 @@ namespace _GAME_.Scripts.Managers
 
         [Header("Parents")] [SerializeField] private Transform boardsParent;
         [SerializeField] private Transform cubeParent;
+        [SerializeField] private Transform pipeParent;
         
         [Header("Prefab")] [SerializeField] private BoardBear boardPrefab;
         [SerializeField] private CubeBear cubePrefab;
+        [SerializeField] private PipeBear pipePrefab;
 
         #endregion
 
@@ -21,6 +23,7 @@ namespace _GAME_.Scripts.Managers
 
         public CustomObjectPool<BoardBear> boardPool;
         public CustomObjectPool<CubeBear> cubePool;
+        public CustomObjectPool<PipeBear> pipePool;
 
         #endregion
 
@@ -30,6 +33,7 @@ namespace _GAME_.Scripts.Managers
         {
             boardPool = new CustomObjectPool<BoardBear>(boardPrefab, 10, boardsParent);
             cubePool = new CustomObjectPool<CubeBear>(cubePrefab, 10, cubeParent);
+            pipePool = new CustomObjectPool<PipeBear>(pipePrefab, 10, pipeParent);
         }
 
         #endregion
@@ -45,6 +49,11 @@ namespace _GAME_.Scripts.Managers
         {
             return cubePool.Get();
         }
+        
+        public PipeBear GetPipe()
+        {
+            return pipePool.Get();
+        }
 
         public void ReturnBoard(BoardBear board)
         {
@@ -54,6 +63,11 @@ namespace _GAME_.Scripts.Managers
         public void ReturnCube(CubeBear cube)
         {
             cubePool.Release(cube);
+        }
+        
+        public void ReturnPipe(PipeBear pipe)
+        {
+            pipePool.Release(pipe);
         }
 
         #endregion

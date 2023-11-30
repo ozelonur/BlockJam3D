@@ -46,8 +46,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc8135f79e9c4a38a8045b1b16924c07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cubeParent: {fileID: 4175637288539545063}
   isFilled: 0
+  currentCube: {fileID: 0}
+  linkedTile: {fileID: 0}
+  pipeBear: {fileID: 0}
+  containsPipe: 0
+  cubeParent: {fileID: 4175637288539545063}
+  cubeCountInPipe: 0
 --- !u!1 &3311786511891530320
 GameObject:
   m_ObjectHideFlags: 0

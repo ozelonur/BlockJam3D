@@ -695,6 +695,7 @@ Transform:
   m_Children:
   - {fileID: 3759697}
   - {fileID: 2089033049}
+  - {fileID: 1019262669}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1027,6 +1028,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 980470191}
   m_CullTransparentMesh: 1
+--- !u!1 &1019262668
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1019262669}
+  m_Layer: 0
+  m_Name: PipeParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1019262669
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1019262668}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 479893252}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1153929480
 GameObject:
   m_ObjectHideFlags: 0
@@ -1989,9 +2021,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boardsParent: {fileID: 3759697}
   cubeParent: {fileID: 2089033049}
+  pipeParent: {fileID: 1019262669}
   boardPrefab: {fileID: 4823183323084573448, guid: 4df32ee13e685744d85aacf09aeee211,
     type: 3}
   cubePrefab: {fileID: 8721806777853143389, guid: fb8a0e671a0fcc049aa1abf01a6e2b34,
+    type: 3}
+  pipePrefab: {fileID: 4542676728477696532, guid: c3569773ea3f3409fad7115ceaf6aba3,
     type: 3}
 --- !u!1 &1923832686
 GameObject:

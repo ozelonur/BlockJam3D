@@ -14,6 +14,7 @@ namespace OrangeBear.Bears
         public bool isFilled;
         public CubeBear currentCube;
         public TileBear linkedTile;
+        public PipeBear pipeBear;
         public bool containsPipe;
 
         #endregion
@@ -23,12 +24,26 @@ namespace OrangeBear.Bears
         [SerializeField] private Transform cubeParent;
 
         [ShowIf("containsPipe")] [SerializeField]
-        private int cubeCountInPipe;
+        public int cubeCountInPipe;
 
         #endregion
 
 
         #region MonoBehaviour Methods
+
+        private void Awake()
+        {
+            if (!containsPipe) return;
+            
+            pipeBear = PoolManager.Instance.GetPipe();
+
+            Transform pipeBearTransform;
+            (pipeBearTransform = pipeBear.transform).SetParent(cubeParent);
+                
+            pipeBearTransform.localPosition = Vector3.zero;
+
+            pipeBear.linkedTile = linkedTile;
+        }
 
         private void Start()
         {

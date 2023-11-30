@@ -68,79 +68,93 @@ namespace OrangeBear.Bears
 
         private void GenerateCubes()
         {
-            int maxSetsForAnyColor = _tiles.Count / cubeColors.Count;
-            int maxTotalSets = maxSetsForAnyColor * cubeColors.Count;
+            int count = _tiles.Sum(tile => tile.containsPipe ? tile.cubeCountInPipe : 1);
+            OBDebug.Log("Count: " + count);
 
-            foreach (ColorData colorData in cubeColors)
-            {
-                cubeColorCounts[colorData.color] = 0;
-            }
+            int totalSetsOfThree = count / 3;
 
-            for (int i = 0; i < maxTotalSets; i++)
+            int setsPerColor = totalSetsOfThree / cubeColors.Count;
+
+            int additionalSets = totalSetsOfThree % cubeColors.Count;
+
+            _generatedColors = new List<ColorData>();
+            cubeColorCounts.Clear();
+
+            foreach (ColorData color in cubeColors)
             {
-                foreach (ColorData color in cubeColors.Where(color =>
-                             cubeColorCounts[color.color] < maxSetsForAnyColor * 3))
+                for (int i = 0; i < setsPerColor; i++)
                 {
-                    CreateSetOfThreeCubes(color);
+                    AddSetOfThreeCubes(color);
                 }
             }
 
-            int remainingTiles = _tiles.Count - (maxTotalSets * 3);
-
-            while (remainingTiles > 0)
+            for (int i = 0; i < additionalSets; i++)
             {
                 ColorData additionalColor = cubeColors[Random.Range(0, cubeColors.Count)];
-
-                if (cubeColorCounts[additionalColor.color] >= 3) continue;
-
-                CreateSetOfThreeCubes(additionalColor);
-                remainingTiles -= 3;
+                AddSetOfThreeCubes(additionalColor);
             }
-            
-            GenerateCubesFromList();
-        }
 
-        private void CreateSetOfThreeCubes(ColorData color)
-        {
-            _generatedColors ??= new List<ColorData>();
-
-            int createdCubes = 0;
-            while (createdCubes < 3)
+            int remainingCubes = count % 3;
+            while (remainingCubes > 0)
             {
-                TileBear tile = GetRandomTile();
-                if (tile != null && cubeColorCounts[color.color] < (_tiles.Count / cubeColors.Count) * 3)
+                ColorData randomColor = cubeColors[Random.Range(0, cubeColors.Count)];
+                _generatedColors.Add(randomColor);
+                if (cubeColorCounts.ContainsKey(randomColor.color))
                 {
-                    // tile.GenerateCubeOnTile(color);
-                    _generatedColors.Add(color);
-                    cubeColorCounts[color.color]++;
-                    createdCubes++;
+                    cubeColorCounts[randomColor.color]++;
                 }
                 else
                 {
-                    break;
+                    cubeColorCounts[randomColor.color] = 1;
                 }
+                remainingCubes--;
             }
+
+            GenerateCubesOnTiles();
         }
 
-        private void GenerateCubesFromList()
+        private void AddSetOfThreeCubes(ColorData color)
         {
-            foreach (ColorData color in _generatedColors)
+            for (int i = 0; i < 3; i++)
             {
-                TileBear tile = GetRandomTile();
-                if (tile != null)
+                _generatedColors.Add(color);
+                if (cubeColorCounts.ContainsKey(color.color))
                 {
-                    tile.GenerateCubeOnTile(color);
+                    cubeColorCounts[color.color]++;
+                }
+                else
+                {
+                    cubeColorCounts[color.color] = 1;
                 }
             }
         }
 
-        private TileBear GetRandomTile()
+        private void GenerateCubesOnTiles()
         {
-            List<TileBear> emptyTiles = _tiles.Where(tile => tile.currentCube == null).ToList();
+            foreach (TileBear tile in _tiles)
+            {
+                switch (tile.containsPipe)
+                {
+                    case false when _generatedColors.Count > 0:
+                    {
+                        int colorIndex = Random.Range(0, _generatedColors.Count);
+                        tile.GenerateCubeOnTile(_generatedColors[colorIndex]);
+                        _generatedColors.RemoveAt(colorIndex);
+                        break;
+                    }
+                    case true:
+                    {
+                        for (int i = 0; i < tile.cubeCountInPipe && _generatedColors.Count > 0; i++)
+                        {
+                            int colorIndex = Random.Range(0, _generatedColors.Count);
+                            tile.pipeBear.AddColor(_generatedColors[colorIndex]);
+                            _generatedColors.RemoveAt(colorIndex);
+                        }
 
-            OBDebug.Log("Empty tiles count: " + emptyTiles.Count);
-
-            return emptyTiles.Count == 0 ? null : emptyTiles[Random.Range(0, emptyTiles.Count)];
+                        break;
+                    }
+                }
+            }
         }
 
         #endregion
